@@ -30,8 +30,6 @@ class Tm_Builder_Module_Taxonomy extends Tm_Builder_Module {
 
 	private $taxonomies_source = null;
 
-	private $taxonomies_slugs = null;
-
 	public function init() {
 		$this->name					= esc_html__( 'Taxonomy', 'power-builder' );
 		$this->icon					= 'f02c';
@@ -69,10 +67,9 @@ class Tm_Builder_Module_Taxonomy extends Tm_Builder_Module {
 
 		foreach ( $taxonomies as $key => $value ) {
 			if ( ! in_array( $key, $exclude_taxonomies ) ) {
-				$new_key = str_replace( '-', '_', $key);
 
-				$this->taxonomies_slugs[ $new_key ] = $key;
-				$output_taxonomies[ $new_key ] = $value->labels->name;
+				$output_taxonomies[ $key ] = $value->labels->name;
+
 			}else{
 				continue;
 			}
@@ -86,15 +83,18 @@ class Tm_Builder_Module_Taxonomy extends Tm_Builder_Module {
 			$output_array = array();
 
 			foreach ( $this->taxonomies_source as $key => $value ) {
-				$output_array[ $key ] = array(
+
+				$_key = str_replace( '-', '_', $key );
+
+				$output_array[ $_key ] = array(
 					'label'					=> esc_html__( 'Include ', 'power-builder' ) . $value,
 					'option_category'		=> 'basic_option',
 					'depends_show_if'		=> $key,
 					'renderer'				=> 'tm_builder_include_categories_option',
 					'renderer_options'		=> array(
 						'use_terms'  => true,
-						'term_name'  => $this->taxonomies_slugs[ $key ],
-						'input_name' => 'tm_pb_' . $key,
+						'term_name'  => $key,
+						'input_name' => 'tm_pb_' . $_key,
 					),
 					'description'			=> esc_html__( 'Choose which taxonomies you would like to include.', 'power-builder' ),
 				);
@@ -105,6 +105,9 @@ class Tm_Builder_Module_Taxonomy extends Tm_Builder_Module {
 	}
 
 	private function get_taxonomies_html_id( $taxonomy ){
+
+		$taxonomy = str_replace( '-', '_', $taxonomy );
+		
 		return '#tm_pb_' . $taxonomy ;
 	}
 
