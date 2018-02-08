@@ -327,7 +327,7 @@ class Tm_Builder_Element {
 
 		// If the section/row/module is disabled, hide it
 		if ( isset( $this->shortcode_atts['disabled'] ) && 'on' === $this->shortcode_atts['disabled'] ) {
-			return;
+			//return;
 		}
 
 		//override module attributes for global module
