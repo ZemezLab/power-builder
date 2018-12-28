@@ -65,7 +65,7 @@ function tm_builder_load_modules_styles() {
 			),
 		),
 		'tm-builder-swiper' => array(
-			TM_BUILDER_URI . '/framework/assets/js/swiper.jquery.min.js',
+			TM_BUILDER_URI . '/framework/assets/js/swiper.min.js',
 			array( 'jquery', ),
 		),
 	);
@@ -73,7 +73,7 @@ function tm_builder_load_modules_styles() {
 	wp_register_script( 'hashchange', TM_BUILDER_URI . '/framework/assets/js/libs/jquery.hashchange.js', array( 'jquery' ), TM_BUILDER_VERSION, true );
 	wp_register_script( 'salvattore', TM_BUILDER_URI . '/framework/assets/js/libs/salvattore.min.js', array(), TM_BUILDER_VERSION, true );
 	wp_register_script( 'easypiechart', TM_BUILDER_URI . '/framework/assets/js/libs/jquery.easypiechart.js', array( 'jquery' ), TM_BUILDER_VERSION, true );
-	wp_register_script( 'tm-builder-swiper', TM_BUILDER_URI . '/framework/assets/js/swiper.jquery.min.js', array( 'jquery' ), TM_BUILDER_VERSION, true );
+	wp_register_script( 'tm-builder-swiper', TM_BUILDER_URI . '/framework/assets/js/swiper.min.js', array( 'jquery' ), TM_BUILDER_VERSION, true );
 
 	if ( tm_is_builder_plugin_active() ) {
 		wp_enqueue_style( 'tm-builder-swiper', TM_BUILDER_URI . '/framework/assets/css/swiper.min.css', array(), TM_BUILDER_VERSION );

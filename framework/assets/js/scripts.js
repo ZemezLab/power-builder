@@ -2282,24 +2282,50 @@ jQuery(document).ready( function($){
 				swiperContainer = $( '.swiper-container', $this ),
 				swiper = new Swiper( swiperContainer , {
 						slidesPerView: +slidesPerView,
-						autoplay: autoplay,
+						//autoplay: autoplay,
+						autoplay: autoplay ? {
+							delay: autoplay
+						} : false,
 						centeredSlides: centeredSlides,
 						mousewheelControl: false,
-						paginationClickable: true,
+						//paginationClickable: true,
 						spaceBetween: +spaceBetweenSlides,
 						speed: 500,
-						nextButton: ( navigateButton ) ? $('.swiper-button-next', $this) : null,
-						prevButton: ( navigateButton ) ? $('.swiper-button-prev', $this) : null,
-						pagination: ( pagination ) ? $('.swiper-pagination', $this) : null,
-						onInit: function(){
-							if ( ! navigateButton ) {
-								$('.swiper-button-next, .swiper-button-prev', $this).remove();
-							}
+						//nextButton: ( navigateButton ) ? $('.swiper-button-next', $this) : null,
+						//prevButton: ( navigateButton ) ? $('.swiper-button-prev', $this) : null,
+						//pagination: ( pagination ) ? $('.swiper-pagination', $this) : null,
 
-							if ( ! pagination ) {
-								$('.swiper-pagination', $this).remove();
+						pagination: {
+							el: ( pagination ) ? $('.swiper-pagination', $this) : null,
+							clickable: true
+						},
+						navigation: {
+							nextEl: ( navigateButton ) ? $('.swiper-button-next', $this) : null,
+							prevEl: ( navigateButton ) ? $('.swiper-button-prev', $this) : null
+						},
+
+						// onInit: function(){
+						// 	if ( ! navigateButton ) {
+						// 		$('.swiper-button-next, .swiper-button-prev', $this).remove();
+						// 	}
+
+						// 	if ( ! pagination ) {
+						// 		$('.swiper-pagination', $this).remove();
+						// 	}
+						// },
+
+						on:{
+							init: function() {
+								if ( ! navigateButton ) {
+									$('.swiper-button-next, .swiper-button-prev', $this).remove();
+								}
+
+								if ( ! pagination ) {
+									$('.swiper-pagination', $this).remove();
+								}
 							}
 						},
+
 						breakpoints: {
 							1200: {
 								slidesPerView: Math.floor( slidesPerView * 0.75 ),
